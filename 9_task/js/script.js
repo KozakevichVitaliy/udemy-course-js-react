@@ -5,23 +5,23 @@ window.addEventListener('DOMContentLoaded', function() {
     info = document.querySelector('.info-header'),
     tabContent = document.querySelectorAll('.info-tabcontent');
 
-  function hideTabContent(a) {
+  const hideTabContent = a => {
     for (let i = a; i < tabContent.length; i++) {
       tabContent[i].classList.remove('show');
       tabContent[i].classList.add('hide');
     }
-  }
+  };
 
   hideTabContent(1);
 
-  function showTabContent(b) {
+  const showTabContent = b => {
     if (tabContent[b].classList.contains('hide')) {
       tabContent[b].classList.remove('hide');
       tabContent[b].classList.add('show');
     }
-  }
+  };
 
-  info.addEventListener('click', function(event) {
+  info.addEventListener('click', event => {
     let target = event.target;
 
     if (target && target.classList.contains('info-header-tab')) {
@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   let deadline = '2020-03-18';
 
-  function getTimeRemaining(endtime) {
+  const getTimeRemaining = endtime => {
     let t = Date.parse(endtime) - Date.parse(new Date()),
       seconds = Math.floor((t / 1000) % 60),
       minutes = Math.floor((t / 1000 / 60) % 60),
@@ -50,9 +50,9 @@ window.addEventListener('DOMContentLoaded', function() {
       minutes: minutes,
       seconds: seconds,
     };
-  }
+  };
 
-  function setClock(id, endtime) {
+  const setClock = (id, endtime) => {
     let timer = document.getElementById(id),
       hours = timer.querySelector('.hours'),
       minutes = timer.querySelector('.minutes'),
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', function() {
     function updateClock() {
       let t = getTimeRemaining(endtime);
 
-      function addZero(num) {
+      const addZero = (num) => {
         if (+num < 10) return '0' + num;
         else return num;
       }
@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function() {
         seconds.textContent = '00';
       }
     }
-  }
+  };
 
   setClock('timer', deadline);
 
@@ -92,12 +92,12 @@ window.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = 'hidden';
   });
 
-  close.addEventListener('click', function() {
+  close.addEventListener('click', () => {
     overlay.style.display = 'none';
     more.classList.remove('more-splash');
     document.body.style.overflow = '';
   });
-  
+
   descriptionBtns.forEach(element => {
     element.addEventListener('click', function() {
       overlay.style.display = 'block';
