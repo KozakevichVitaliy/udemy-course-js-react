@@ -112,26 +112,30 @@ window.addEventListener('DOMContentLoaded', function() {
 
   let message = {
     loading: 'Загузка...',
-    success: 'Спасибо! Скоро мы с вами свяжемся!',   // obj with readystage messages
+    success: 'Спасибо! Скоро мы с вами свяжемся!', // obj with readystage messages
     failure: 'Что-то пошло не так!',
   };
 
   let form = document.querySelector('.main-form'),
-    inputs = form.getElementsByTagName('input'),
-    statusMessage = document.createElement('div');
+    statusMessage = document.createElement('div'),
+    contactForm = document.querySelector('#form');
 
   statusMessage.classList.add('status');
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    form.appendChild(statusMessage);
+  form.addEventListener('submit', dataSending);
+  contactForm.addEventListener('submit', dataSending);
 
-    let request = new XMLHttpRequest();
+  function dataSending(event) {
+    event.preventDefault();
+    this.appendChild(statusMessage);
+
+    let request = new XMLHttpRequest(),
+      inputs = this.getElementsByTagName('input');
     request.open('POST', 'server.php');
     // request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
-    let formData = new FormData(form);
+    let formData = new FormData(this);
 
     let obj = {};
     formData.forEach((value, key) => {
@@ -139,7 +143,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     let json = JSON.stringify(obj);
-
     // request.send(formData);
     request.send(json);
 
@@ -156,5 +159,5 @@ window.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].value = '';
     }
-  });
+  }
 });
