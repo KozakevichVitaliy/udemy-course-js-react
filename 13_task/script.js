@@ -119,11 +119,12 @@ window.addEventListener('DOMContentLoaded', function() {
   let form = document.querySelector('.main-form'),
     statusMessage = document.createElement('div'),
     contactForm = document.querySelector('#form');
-
-  statusMessage.classList.add('status');
+    statusMessage.classList.add('status');
 
   form.addEventListener('submit', dataSending);
   contactForm.addEventListener('submit', dataSending);
+  
+
 
   function dataSending(event) {
     event.preventDefault();
