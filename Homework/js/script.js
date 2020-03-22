@@ -1,7 +1,7 @@
 $(document).ready(function() {
   let overlay = $('.overlay');
   let modal = $('.modal');
-  let btnTimetable = $('li:odd a.timetable');
+  let btnTimetable = $('li:odd a#timetable');
   let btnSelect = $('.main_btn');
   let btnClose = $('.close');
 
